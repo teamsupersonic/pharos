@@ -28,6 +28,20 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var curr_location = huntsville;
 
+function updateLocation()
+{
+	if (navigator.geolocation) 
+	{
+		navigator.geolocation.getCurrentPosition(getPosition, showError, { enableHighAccuracy: true, timeout: 20000, maximumAge: 0 });
+	} 
+	else 
+	{
+		toastr.error('Geolocation is not supported in your browser', 'Error', { 
+			"positionClass": "toast-bottom-right"
+		});
+	}
+}
+
 updateLocation();
 
 function getPosition(position)
@@ -39,10 +53,28 @@ function getPosition(position)
 
 function showError(error)
 {
-	//alert("Error: " + error);
-	toastr.error('Please enable the location settings in your browser to use this page.', 'Error', { 
-		"positionClass": "toast-bottom-right"
-	});
+	var errors = { 
+    	1: 'Permission denied',
+    	2: 'Position unavailable',
+    	3: 'Request timeout'
+  	};
+
+	if (errors[error.code] === 1) {
+		toastr.error('Please enable the location settings in your browser to use this page. ', 'Error', { 
+			"positionClass": "toast-bottom-right"
+		});
+	}
+	else if (errors[error.code] === 2) {
+		toastr.error('Unable to get your location at this time. Plase try again.', 'Error', { 
+			"positionClass": "toast-bottom-right"
+		});
+	}
+	else {
+		toastr.error('Request timed out while trying to get your location. Please try again.', 'Error', { 
+			"positionClass": "toast-bottom-right"
+		});
+	}
+	
 }
 
 function toggleTraffic()
@@ -57,21 +89,6 @@ function toggleTraffic()
 	{
 		document.getElementById("traffic").innerHTML = "Show Traffic";
 		
-	}
-}
-
-function updateLocation()
-{
-	if (navigator.geolocation) 
-	{
-		navigator.geolocation.getCurrentPosition(getPosition, showError, { enableHighAccuracy: true, timeout: 1000, maximumAge: 0 });
-	} 
-	else 
-	{
-		//alert('Geolocation is not supported in your browser');
-		toastr.error('Geolocation is not supported in your browser', 'Error', { 
-			"positionClass": "toast-bottom-right"
-		});
 	}
 }
 
