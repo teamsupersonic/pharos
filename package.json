@@ -1,0 +1,24 @@
+{
+  "name": "pharos",
+  "version": "0.0.1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/teamsupersonic/pharos"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+  },
+  "keywords": [
+    "flood",
+    "first responders",
+    "hackathon",
+    "heroku"
+  ],
+  "devDependencies": {
+  }
+}

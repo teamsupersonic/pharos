@@ -1,0 +1,31 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.navbar-blue {
+    background-color: #25A9E0;
+}
+
+.nav > li > a {
+    color: #FFFFFF;
+}
+
+.navbar {
+    border-radius: 0;
+    margin: 0;
+}
+
+.navbar-nav li a {
+ line-height: 50px;
+}
+
+.dropdown > a:hover {
+    background-color: #2B388F;
+}
