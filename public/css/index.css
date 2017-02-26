@@ -1,0 +1,51 @@
+body {
+    background: url(../img/pharos_header_graphic.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    z-index: -9999;
+}
+
+.login-content {
+    position: relative;
+    padding-top: 20%; /* Push the text down the page */
+    margin: 0 auto; /* used to center the div on the page */
+    width: 600px; /* also used to center the div on the page */
+}
+
+#emailInput {
+    width: 390px;
+}
+
+.text-center {
+    width: 550px;
+    margin: 0 auto;
+}
+
+.btn-blue {
+    background-color: #25A9E0;
+    border-radius: 0;
+}
+
+#loginBtn {
+    width: 120px
+}
+
+#forgotPassword {
+    margin-left: 70%;
+}
+
+#call-to-arms {
+    margin: 100px auto 0 auto;
+    color: #FFFFFF;
+    width: 550px;
+    text-align: center;
+}
+
+/* For Phones */
+@media (min-width: 300px) {
+  #emailInput {
+      display: initial;
+  }
+}
