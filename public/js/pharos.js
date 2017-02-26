@@ -15,7 +15,7 @@ var map = L.map('map', {
 
 L.control.layers({}, 
 {
-  'Traffic Flow': MQ.trafficLayer({layers: ['flow']}),
+  'Traffic Flow': MQ.trafficLayer( { layers: ['flow'] } ),
   'Satellite': MQ.satelliteLayer()
 }).addTo(map);
 
@@ -28,25 +28,21 @@ L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var curr_location = huntsville;
 
-if (navigator.geolocation) 
-{
-	navigator.geolocation.getCurrentPosition(getPosition, showError, {enableHighAccuracy: true, timeout: 1000, maximumAge: 0});
-} 
-else 
-{
-	alert('Geolocation is not supported in your browser');
-}
+updateLocation();
 
 function getPosition(position)
 {
 	var x = position.coords.latitude;
 	var y = position.coords.longitude;
-	curr_location = {lat: x, lng: y};
+	curr_location = { lat: x, lng: y };
 }
 
 function showError(error)
 {
-	alert("Error: " + error);
+	//alert("Error: " + error);
+	toastr.error('Please enable the location settings in your browser to use this page.', 'Error', { 
+		"positionClass": "toast-bottom-right"
+	});
 }
 
 function toggleTraffic()
@@ -68,11 +64,14 @@ function updateLocation()
 {
 	if (navigator.geolocation) 
 	{
-		navigator.geolocation.getCurrentPosition(getPosition, showError, {enableHighAccuracy: true, timeout: 1000, maximumAge: 0});
+		navigator.geolocation.getCurrentPosition(getPosition, showError, { enableHighAccuracy: true, timeout: 1000, maximumAge: 0 });
 	} 
 	else 
 	{
-		alert('Geolocation is not supported in your browser');
+		//alert('Geolocation is not supported in your browser');
+		toastr.error('Geolocation is not supported in your browser', 'Error', { 
+			"positionClass": "toast-bottom-right"
+		});
 	}
 }
 
