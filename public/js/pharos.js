@@ -3,10 +3,21 @@ var huntsville = {
     lng: "-86.597165"
 }
 
+var mapLayer = MQ.mapLayer(), map;
+
 var zoom = 13;
 
-var map = L.map('map')
-    .setView( [ huntsville.lat, huntsville.lng ], zoom);
+var map = L.map('map', {
+  layers: mapLayer,
+  center: [ huntsville.lat, huntsville.lng ],
+  zoom: zoom
+});
+
+L.control.layers({}, 
+{
+  'Traffic Flow': MQ.trafficLayer({layers: ['flow']}),
+  'Satellite': MQ.satelliteLayer()
+}).addTo(map);
 
 L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -36,6 +47,21 @@ function getPosition(position)
 function showError(error)
 {
 	alert("Error: " + error);
+}
+
+function toggleTraffic()
+{
+	var elem = document.getElementById("traffic");
+	if(elem.innerHTML == "Show Traffic")
+	{
+		document.getElementById("traffic").innerHTML = "Hide Traffic";
+		MQ.trafficLayer().addTo(map);
+	}
+	else
+	{
+		document.getElementById("traffic").innerHTML = "Show Traffic";
+		
+	}
 }
 
 function updateLocation()
