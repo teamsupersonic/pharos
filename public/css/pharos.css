@@ -26,6 +26,6 @@ html, body {
  line-height: 50px;
 }
 
-.dropdown > a:hover {
+li.dropdown.open:hover {
     background-color: #2B388F;
 }
