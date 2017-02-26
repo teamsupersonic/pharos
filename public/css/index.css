@@ -29,7 +29,8 @@ body {
 }
 
 #loginBtn {
-    width: 120px
+    width: 120px;
+    color: #FFFFFF;
 }
 
 #call-to-arms {
