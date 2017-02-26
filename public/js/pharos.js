@@ -15,7 +15,7 @@ var map = L.map('map', {
 
 L.control.layers({}, 
 {
-  'Traffic Flow': MQ.trafficLayer( { layers: ['flow'] } ),
+  'Traffic Flow': MQ.trafficLayer({layers: ['flow']}),
   'Satellite': MQ.satelliteLayer()
 }).addTo(map);
 
@@ -95,50 +95,74 @@ function toggleTraffic()
 function dropPin(type)
 {
 	updateLocation();
-	switch(type)
+	showButtons(type);
+}
+
+function openPanel()
+{
+	document.getElementById("panel").style.display = "inline";
+	document.getElementById("panel1").style.display = "none";
+}
+
+var active_type = "";
+
+function showButtons(type)
+{
+	document.getElementById("panel1").style.display = "inline";
+	document.getElementById("panel").style.display = "none";
+	active_type = type;
+}
+
+function addMarker(sev)
+{
+	switch(sev)
 	{
-		case "vehicle":
-			var myIcon = L.icon({
-						iconUrl: 'img/Hackathon_PHAROS_LOGO_v1_pin-disabledvehicle-green.svg',
-						iconSize: [38, 95],
-						iconAnchor: [22, 94]
-					});
-			break;
-		case "flood":
-			var myIcon = L.icon({
-						iconUrl: 'img/Hackathon_PHAROS_LOGO_v1_pin-flooding-green.svg',
-						iconSize: [38, 95],
-						iconAnchor: [22, 94]
-					});
-			break;
-		case "person":
-			var myIcon = L.icon({
-						iconUrl: 'img/Hackathon_PHAROS_LOGO_v1_pin-personinneed-green.svg',
-						iconSize: [38, 95],
-						iconAnchor: [22, 94]
-					});
-			break;
-		case "fire":
-			var myIcon = L.icon({
-						iconUrl: 'img/Hackathon_PHAROS_LOGO_v1_pin-fire-green.svg',
-						iconSize: [38, 95],
-						iconAnchor: [22, 94]
-					});
-			break;
-		case "tree":
-			var myIcon = L.icon({
-						iconUrl: 'img/Hackathon_PHAROS_LOGO_v1_pin-fallentree-green.svg',
-						iconSize: [38, 95],
-						iconAnchor: [22, 94]
-					});
-			break;
-		case "road":
-			var myIcon = L.icon({
-						iconUrl: 'img/Hackathon_PHAROS_LOGO_v1_pin-roadclosure-green.svg',
-						iconSize: [38, 95],
-						iconAnchor: [22, 94]
-					});
-			break;
+		case "low": sev = "green"; break;
+		case "med": sev = "yellow"; break;
+		case "high": sev = "red"; break;
 	}
+	switch(active_type)
+	{
+		case "vehicle": active_type = "disabledvehicle"; break;
+		case "flood": active_type = "flooding"; break;
+		case "person": active_type = "personinneed"; break;
+		case "fire": active_type = "fire"; break;
+		case "tree": active_type = "fallentree"; break;
+		case "road": active_type = "obstructedroad"; break;
+	}
+	var icon_string = 'img/Hackathon_PHAROS_LOGO_v1_pin-' + active_type + '-' + sev + '.svg'
+	var myIcon = L.icon({
+						iconUrl: icon_string,
+						iconSize: [38, 95],
+						iconAnchor: [22, 94]
+					});
 	L.marker([curr_location.lat, curr_location.lng], {icon: myIcon}).addTo(map);
+}
+
+function addDirections()
+{
+	updateLocation();
+	
+	var input = document.getElementById("find").value;
+	
+	var dir = MQ.routing.directions();
+
+	dir.route({locations: [{latLng: {lat: curr_location.lat, lng: curr_location.lng}},input]});
+
+	map.addLayer(MQ.routing.routeLayer({
+		directions: dir,
+		fitBounds: true
+	}));
+	
+	document.getElementById("panel").style.display = "none";
+}
+
+function closePanel()
+{
+	document.getElementById("panel").style.display = "none";
+}
+
+function closePanel1()
+{
+	document.getElementById("panel1").style.display = "none";
 }

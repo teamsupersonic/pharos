@@ -33,3 +33,60 @@ html, body {
 li.dropdown.open:hover {
     background-color: #2B388F;
 }
+
+.custom-panel
+{
+	display: none;
+	width: 20%;
+	height: 100%;
+	z-index: 2000;
+	position: fixed;
+	top: 80px;
+	left: 0px;
+	background: white;
+	color: #F1F1F2;
+}
+
+#find
+{
+	margin-left: 10%;
+	margin-top: 5%;
+	color: black;
+	height: 5%;
+	border-radius: 20px;
+	width: 80%;
+	border: 1px solid #F1F1F2;
+	padding-left: 10%;
+}
+
+.side-header-custom
+{
+	font-size: 40px;
+	margin-top: 10%;
+	margin-left: 10%;
+	padding-top: 10%;
+}
+
+#find:focus
+{
+	outline: none;
+}
+
+.x-button
+{
+	float: right;
+	margin-top: 10px;
+	margin-right: 10px;
+	display:inline-block;
+	opacity: 0.3;
+}
+
+.option-button
+{
+	width: 80%;
+	font-size:30px;
+	padding: 10px;
+	background-color: #25A9E0;
+	border: none;
+	margin-left: 10%;
+}

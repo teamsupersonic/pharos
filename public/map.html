@@ -5,14 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pharos</title>
-
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/toastr.min.css" />
+	<link rel="stylesheet" href="css/toastr.min.css" />
     <link rel="stylesheet" href="css/pharos.css" />
-	
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-
   </head>
   <body>
     <nav class="navbar navbar-blue">
@@ -27,7 +24,6 @@
           </button>
           <a class="navbar-brand" href="#"><img src="img/pharos_header_logo.svg" alt="Pharos logo" height="60" width="269" /></a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -42,12 +38,11 @@
 				<li><a href="#" onclick="dropPin('road');">Road Closure</a></li>
               </ul>
             </li>
-
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Update All Pins</a></li>
-                <li><a href="#">Navigate</a></li>
+                <li><a href="#" onclick="openPanel();">Navigate</a></li>
 				<li><a href="#">Log Out</a></li>
               </ul>
             </li>
@@ -55,16 +50,27 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
     <div id="map"></div>
-
+	<div id="panel" class="custom-panel">
+		<img src="img/x-1727490_960_720.png" height="15" width="15" id="x-close" onclick="closePanel();" class="x-button"><br><br>
+		<span class="side-header-custom" id="search-header">search</span>
+		<input type="text" id="find" onchange="addDirections();" placeholder="enter incident address"/>
+	</div>
+	<div id="panel1" class="custom-panel">
+		<img src="img/x-1727490_960_720.png" height="15" width="15" id="x-close-1" onclick="closePanel1();" class="x-button"><br><br>
+		<span class="side-header-custom">severity</span><br><br>
+		<button type="button" onclick="addMarker('low');" class="option-button">low severity</button><br><br>
+		<button type="button" onclick="addMarker('med');" class="option-button">medium severity</button><br><br>
+		<button type="button" onclick="addMarker('high');" class="option-button">high severity</button>
+	</div>
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-	  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
-	  <script type="text/javascript" src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=u5182zBWh381KjU53wUFWVFURTImiXiI"></script>
-	  <script type="text/javascript" src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-traffic.js?key=u5182zBWh381KjU53wUFWVFURTImiXiI"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+	<script type="text/javascript" src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-map.js?key=u5182zBWh381KjU53wUFWVFURTImiXiI"></script>
+	<script type="text/javascript" src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-traffic.js?key=u5182zBWh381KjU53wUFWVFURTImiXiI"></script>
+	<script type="text/javascript" src="https://www.mapquestapi.com/sdk/leaflet/v2.2/mq-routing.js?key=u5182zBWh381KjU53wUFWVFURTImiXiI"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/toastr.min.js"></script>
+	<script type="text/javascript" src="js/toastr.min.js"></script>
     <script type="text/javascript" src="js/pharos.js"></script>
   </body>
 </html>
